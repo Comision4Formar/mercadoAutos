@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Listado de Autos</h1>
-</body>
+<%- include('partials/head') %>
+
+    <body>
+        <%- include('partials/header') %>
+
+            <main>
+                <div class="container mt-5">
+                    <h1>Listado de Autos</h1>
+                    <div class="row">
+                        <% autos.forEach(auto => { %>
+                            <div class="col-12 col-md-6 col-lg-3 my-3">
+                                <div class="card" style="width: 98%">
+                                    <img src="/images/<%= auto.img %>"  class="card-img-top" alt="..." />
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= auto.marca %> </h5>
+                                        <a href="/autos/show/<%= auto.id %> " class="btn btn-primary">ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('partials/footer') %>
+    </body>
+
 </html>
