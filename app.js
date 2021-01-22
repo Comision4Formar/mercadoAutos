@@ -12,9 +12,11 @@ app.use(express.static(__dirname +'/public'));
 
 const indexRouter = require('./routes/indexRouter');
 const autosRouter = require('./routes/autosRouter');
+const adminRouter = require('./routes/adminRouter');
 
 
 app.use('/',indexRouter);
 app.use('/autos',autosRouter);
+app.use('/admin',adminRouter);
 
 app.listen(port,()=>console.log('Servidor corriendo en el puerto ' + port))

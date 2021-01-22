@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const autosController = require('../controllers/autosController');
+const {search,index,show} = require('../controllers/autosController');
 
-router.get('/',autosController.index);
-router.get('/show/:id',autosController.show);
+router.get('/',index);
+router.get('/show/:id',show);
+router.get('/search',search);
 
 
 

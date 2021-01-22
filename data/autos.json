@@ -95,5 +95,13 @@
     "anio": 2010,
     "color": "white",
     "img":"fiat_argo.jpg"
+  },
+  {
+    "id":13,
+    "marca": "fiat",
+    "modelo": "argo",
+    "anio": 2012,
+    "color": "black",
+    "img":"fiat_argo.jpg"
   }
 ]
