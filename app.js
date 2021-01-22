@@ -8,6 +8,10 @@ app.set('views',__dirname + '/views');
 
 app.use(express.static(__dirname +'/public'));
 
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
+
 /* RUTAS */
 
 const indexRouter = require('./routes/indexRouter');
