@@ -30,8 +30,10 @@
                 </li>
                 <li class="list-group-item">
                   <div class="m-2 d-flex justify-content-around">
-                   <a href="" class="btn btn-sm btn-success">Editar</a>
-                   <a href="" class="btn btn-sm btn-danger">Eliminar</a>
+                   <a href="/admin/autos/edit/<%= auto.id %> " class="btn btn-sm btn-success">Editar</a>
+                   <form action="/admin/autos/delete/<%= auto.id %>?_method=DELETE " method="POST">
+                     <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                   </form>
                   </div>
                 </li>
               </ul>
