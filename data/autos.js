@@ -1,3 +1,12 @@
 const fs = require('fs');
+const path = require('path');
+const autos_db = path.join('data','autos.json');
 
-module.exports = JSON.parse(fs.readFileSync(__dirname + '/autos.json','utf-8'));
+module.exports = {
+    getAutos : () => {
+        return JSON.parse(fs.readFileSync(autos_db,'utf-8'));
+    },
+    setAutos : (data) => {
+        fs.writeFileSync(autos_db,JSON.stringify(data),'utf-8');
+    }
+}

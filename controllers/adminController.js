@@ -1,7 +1,63 @@
-const autos = require('../data/autos');
-const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcrypt');
+
+const {getAutos, setAutos} = require(path.join('..','data','autos'));
+const {getAdmins, setAdmins} = require(path.join('..','data','admins'));
+
+const autos = getAutos();
+const admins = getAdmins();
 
 module.exports = {
+    register : (req,res) =>{
+        res.render('admin/register')
+    },
+    login : (req, res) => {
+        res.render('admin/login')
+    },
+    processRegister : (req, res) => {
+        const {username, pass} = req.body;
+
+        let lastID = 0;
+        admins.forEach(admin => {
+            if (admin.id > lastID) {
+                lastID = admin.id
+            }
+        });
+
+        let passHash = bcrypt.hashSync(pass.trim(),12)
+
+        const newAdmin = {
+            id : +lastID + 1,
+            username: username.trim(),
+            pass : passHash
+        }
+
+        admins.push(newAdmin);
+
+        setAdmins(admins);
+
+        res.redirect('/admin/login');
+
+    },
+    processLogin : (req,res) => {
+        const {username, pass} = req.body;
+
+        let result = admins.find(admin => admin.username.toLowerCase() === username.toLowerCase().trim());
+
+        if(result){
+            if(bcrypt.compareSync(pass.trim(),result.pass)){
+                return res.redirect('/admin')
+            }else{
+                res.render('admin/login',{
+                    error : "Credenciales inválidas!"
+                })
+            }
+        }else{
+            res.render('admin/login',{
+                error : "Credenciales inválidas!"
+            })
+        }
+    },
     index : (req,res) => {
         res.render('admin/index')
     },
@@ -36,7 +92,7 @@ module.exports = {
 
         autos.push(auto)
 
-        fs.writeFileSync('./data/autos.json',JSON.stringify(autos),'utf-8');
+        setAutos(autos);
         res.redirect('/admin/autos/list');
 
     },
@@ -62,7 +118,7 @@ module.exports = {
             }
         });
 
-        fs.writeFileSync('./data/autos.json',JSON.stringify(autos),'utf-8');
+        setAutos(autos);
         res.redirect('/admin/autos/list');
     },
     carsDelete : (req,res) => {
@@ -73,7 +129,7 @@ module.exports = {
             }
         });
         
-        fs.writeFileSync('./data/autos.json',JSON.stringify(autos),'utf-8');
+        setAutos(autos);
         res.redirect('/admin/autos/list');
     }
 }

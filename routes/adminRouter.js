@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate} = require('../controllers/adminController');
+const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate, register, processRegister, login, processLogin} = require('../controllers/adminController');
 
 router.get('/',index);
 
+//entidad administradores
+
+router.get('/register',register);
+router.post('/register',processRegister);
+
+router.get('/login',login);
+router.post('/login',processLogin);
+
+
+//entidad autos
 router.get('/autos/list',carsList);
 
 router.get('/autos/create',carsCreate);
