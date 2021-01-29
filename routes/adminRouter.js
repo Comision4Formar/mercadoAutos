@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const upload = require('../middlewares/multerAutos')
+
 
 const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate, register, processRegister, login, processLogin} = require('../controllers/adminController');
+
+
+
+
+
 
 router.get('/',index);
 
@@ -18,7 +25,7 @@ router.post('/login',processLogin);
 router.get('/autos/list',carsList);
 
 router.get('/autos/create',carsCreate);
-router.post('/autos/store',carsStore);
+router.post('/autos/store',upload.any(),carsStore);
 
 router.get('/autos/edit/:id',carsEdit);
 router.put('/autos/update/:id',carsUpdate);

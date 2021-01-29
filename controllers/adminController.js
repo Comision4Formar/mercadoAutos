@@ -1,5 +1,6 @@
 const path = require('path');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 const {getAutos, setAutos} = require(path.join('..','data','autos'));
 const {getAdmins, setAdmins} = require(path.join('..','data','admins'));
@@ -16,6 +17,18 @@ module.exports = {
     },
     processRegister : (req, res) => {
         const {username, pass} = req.body;
+
+        if(!username || !pass){
+            return res.redirect('/admin/register');
+        }
+
+        let result = admins.find(admin => admin.username.toLowerCase() === username.toLowerCase().trim());
+
+        if(result){ 
+           return res.render('admin/register',{
+               error : "El nombre de usuario ya está en uso"
+           })
+        }
 
         let lastID = 0;
         admins.forEach(admin => {
@@ -47,16 +60,12 @@ module.exports = {
         if(result){
             if(bcrypt.compareSync(pass.trim(),result.pass)){
                 return res.redirect('/admin')
-            }else{
-                res.render('admin/login',{
-                    error : "Credenciales inválidas!"
-                })
             }
-        }else{
-            res.render('admin/login',{
-                error : "Credenciales inválidas!"
-            })
         }
+        res.render('admin/login',{
+            error : "Credenciales inválidas!"
+        })
+
     },
     index : (req,res) => {
         res.render('admin/index')
@@ -71,7 +80,8 @@ module.exports = {
 
         res.render('admin/carsCreate')
     },
-    carsStore : (req,res) => {
+    carsStore : (req,res,next) => {
+        
         let lastID = 1;
         autos.forEach(auto => {
             if (auto.id > lastID) {
@@ -87,7 +97,7 @@ module.exports = {
             modelo,
             color,
             anio,
-            img
+            img : req.files[0].filename
         }
 
         autos.push(auto)
@@ -124,6 +134,10 @@ module.exports = {
     carsDelete : (req,res) => {
         autos.forEach(auto => {
             if(auto.id === +req.params.id){
+
+                if(fs.existsSync(path.join('public','images','autos',auto.img))){
+                    fs.unlinkSync(path.join('public','images','autos',auto.img))
+                }
                 var aEliminar = autos.indexOf(auto);
                 autos.splice(aEliminar,1)
             }

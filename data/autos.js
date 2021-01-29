@@ -7,6 +7,6 @@ module.exports = {
         return JSON.parse(fs.readFileSync(autos_db,'utf-8'));
     },
     setAutos : (data) => {
-        fs.writeFileSync(autos_db,JSON.stringify(data),'utf-8');
+        fs.writeFileSync(autos_db,JSON.stringify(data,null,2),'utf-8');
     }
 }

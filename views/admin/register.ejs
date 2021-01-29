@@ -16,12 +16,21 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass" >
                             <label for="floatingPassword">Password</label>
                           </div>
                     </div>
                     <div class="col-12 col-md-8 text-center mt-5">
                         <button type="submit" class="btn btn-primary">Registrarme</button>
+                        <p class="mt-4">¿Estás registrado? <a href="/admin/login">Inicia sesión</a></p>
+
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <% if (typeof error != 'undefined') { %>
+                            <div class="alert alert-danger mt-5">
+                                <span><%= error %> </span>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
             </div>

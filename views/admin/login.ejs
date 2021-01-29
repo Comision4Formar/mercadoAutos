@@ -22,12 +22,18 @@
                     </div>
                     <div class="col-12 col-md-8 text-center mt-5">
                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                    </div>
-                    <% if (typeof error != 'undefined') { %>
-                        <div class="alert alert-danger">
-                            <span><%= error %> </span>
+                        <div class="mt-4">
+                            <p>¿No estás registrado? <a href="/admin/register">Registrate</a></p>
                         </div>
-                    <% } %>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <% if (typeof error != 'undefined') { %>
+                            <div class="alert alert-danger mt-5">
+                                <span><%= error %> </span>
+                            </div>
+                        <% } %>
+                    </div>
+                 
                   
                 </div>
             </div>
