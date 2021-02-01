@@ -67,6 +67,13 @@ module.exports = {
         })
 
     },
+    listAdmins : (req,res) => {
+        res.render('admin/admins',{admins})
+    },
+    profileAdmin : (req, res) => {
+        const admin = admins.find(admin => admin.id === +req.params.id)
+        res.render('admin/profile',{admin})
+    },
     index : (req,res) => {
         res.render('admin/index')
     },

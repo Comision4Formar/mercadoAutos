@@ -1,30 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middlewares/multerAutos')
+const upload = require('../middlewares/subidaImagenes')
 
 
-const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate, register, processRegister, login, processLogin} = require('../controllers/adminController');
-
-
-
-
-
+const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate, register, processRegister, login, processLogin, listAdmins, profileAdmin} = require('../controllers/adminController');
 
 router.get('/',index);
 
 //entidad administradores
 
 router.get('/register',register);
-router.post('/register',processRegister);
+router.post('/register', processRegister);
 
 router.get('/login',login);
 router.post('/login',processLogin);
+
+router.get('/list',listAdmins);
+router.get('/profile/:id',profileAdmin);
 
 
 //entidad autos
 router.get('/autos/list',carsList);
 
-router.get('/autos/create',carsCreate);
+router.get('/autos/create', carsCreate);
 router.post('/autos/store',upload.any(),carsStore);
 
 router.get('/autos/edit/:id',carsEdit);
