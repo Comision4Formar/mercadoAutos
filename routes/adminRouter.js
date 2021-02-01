@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middlewares/subidaImagenes')
+const upload = require('../middlewares/subidaImagenes');
+const registerAdminValidator = require('../validations/registerAdminValidator');
 
 
 const {index, carsList, carsCreate, carsEdit, carsStore, carsDelete, carsUpdate, register, processRegister, login, processLogin, listAdmins, profileAdmin} = require('../controllers/adminController');
@@ -10,7 +11,7 @@ router.get('/',index);
 //entidad administradores
 
 router.get('/register',register);
-router.post('/register', processRegister);
+router.post('/register',registerAdminValidator, processRegister);
 
 router.get('/login',login);
 router.post('/login',processLogin);

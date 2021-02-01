@@ -8,5 +8,30 @@
     "id": 2,
     "username": "Eric",
     "pass": "$2b$12$pchz3HeIu8o5nYWDkpGJ6OxwTlI4IvDpj4HC2DlJEmk2vhMd2cK5O"
+  },
+  {
+    "id": 3,
+    "username": "",
+    "pass": "$2b$12$99JwNmCQaHgRr6sqzyQE/uxq.SBU2kCQP1YFT3Qs48vqErkTRabr6"
+  },
+  {
+    "id": 4,
+    "username": "Maximo",
+    "pass": "$2b$12$A69fKLlCW9brvNWg5e4aMOkviuP4oj0iQwxOMOh88kTSjB9h6QN.u"
+  },
+  {
+    "id": 5,
+    "username": "Frande",
+    "pass": "$2b$12$ozekGNJFuy.2Oc9LAw63tOVdjvEt1lkNEA924Jm39QEj1mM.IhyTa"
+  },
+  {
+    "id": 6,
+    "username": "Andrea",
+    "pass": "$2b$12$OS.OPYNZncr1csoPWQ3Y.eTaz3o5JRmj77l8tm.YxgbCpcCqMDZGa"
+  },
+  {
+    "id": 7,
+    "username": "Gimena",
+    "pass": "$2b$12$lvbn5Xhk4bJDA810R7LIwOPG3McOa46b0/wdu78MJxRGMsdKsLkty"
   }
 ]
