@@ -54,12 +54,25 @@ module.exports = {
 
     },
     processLogin : (req,res) => {
-        const {username, pass} = req.body;
 
-        let result = admins.find(admin => admin.username.toLowerCase() === username.toLowerCase().trim());
+        const {username, pass, recordar} = req.body;
+
+        let result = admins.find(admin => admin.username === username.trim());
 
         if(result){
             if(bcrypt.compareSync(pass.trim(),result.pass)){
+
+                req.session.userAdmin = {
+                    id : result.id,
+                    username : result.username
+                }
+
+                if(recordar != 'undefined'){
+                    res.cookie('userAdmin', req.session.userAdmin, {
+                        maxAge : 1000 * 60
+                    })
+                }
+
                 return res.redirect('/admin')
             }
         }
@@ -67,6 +80,16 @@ module.exports = {
             error : "Credenciales inválidas!"
         })
 
+    },
+    logout : (req,res) => {
+        req.session.destroy();
+        if(req.cookies.userAdmin){
+            res.cookie('userAdmin','',{
+                maxAge: -1
+            })
+        }
+        //delete req.session.userAdmin;
+        res.redirect('/');
     },
     listAdmins : (req,res) => {
         res.render('admin/admins',{admins})
